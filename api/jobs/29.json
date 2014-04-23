@@ -1,0 +1,16 @@
+{
+    "id": 29,
+    "subject": "User Experience Designer",
+    "date_posted": "07/21/2013",
+    "closing_date": "07/21/2013",
+    "number_applicants": 22,
+    "job_status": "open",
+    "number_applications": 30,
+    "applications": {
+        "total": 10,
+        "new": 1,
+        "hot": 1,
+        "interesting": 5,
+        "disqualified": 4
+    }
+}

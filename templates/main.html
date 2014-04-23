@@ -1,0 +1,231 @@
+<script type="text/template" id="collection-template">
+<div class="collection-options">
+	<div class="plus-icon">+</div>
+	<span class="collection-options-header"><span class="icon-eye"></span>all jobs ({{obj.total_items}} records)</span>
+	<div class="fr">
+		<div class="set">
+		<span class="icon-display1"></span>
+		<span class="icon-display2"></span>
+		<span class="icon-display3"></span>
+		</div>
+		<div class="set">		
+		<span class="icon-order1"></span>
+		<span class="icon-order2"></span>
+		<span class="icon-order3"></span>
+		<span class="icon-order4"></span>
+		</div>
+		<div class="set">
+			<span class="icon-search"></span>
+		</div>
+	</div>
+</div>
+<div class="collection-content">
+	<table border="0" cellspacing="0" cellpadding="0">
+		<thead>
+			<tr>
+				<th></th>
+				<th>
+				Jobs
+				</th>
+				<th>
+				Date posted
+				</th>
+				<th>
+				Closing Date
+				</th>
+				<th>
+				Applicants
+				</th>
+				<th>
+				Job Status
+				</th>
+				<th>
+				Applications
+				</th>
+			</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+	<div class="collection-footer">
+		<span class="gotofirstpage big" data-selectpage="1">&lsaquo;&lsaquo;</span>
+		<span class="gotopreviouspage big" data-selectpage="[[var prevpage = obj.page-1;if(prevpage<1){prevpage=1;}]]{{prevpage}}">&lsaquo;</span>
+		<span class="selectpages">
+		[[for (var i= 1; i <= obj.total_pages; i++){]]
+		<span class="selectpage [[if(i === obj.page){]]on[[}]]" data-selectpage="{{i}}">{{i}}</span>
+		[[}]]
+		</span>
+		<span class="gotonextpage big" data-selectpage="[[var nextpage = obj.page + 1; if(nextpage > obj.total_pages){nextpage=obj.total_pages;}]]{{nextpage}}">&rsaquo;</span>
+		<span class="gotolastpage big" data-selectpage="{{obj.total_pages}}">&rsaquo;&rsaquo;</span>
+		<span><label for="items_per_page">items per page</label> 
+		<select id="items_per_page">
+			<option value="10" [[if(obj.items_per_page == 10){]]selected[[}]]>10</option>
+			<option value="20" [[if(obj.items_per_page == 20){]]selected[[}]]>20</option>
+			<option value="30" [[if(obj.items_per_page == 30){]]selected[[}]]>30</option>
+			<option value="50" [[if(obj.items_per_page == 50){]]selected[[}]]>50</option>
+		</select>
+		</span>
+		<span class="showingitems">
+			showing items
+			[[var firstitem =  ((obj.page - 1) * obj.items_per_page) + 1;]]
+			[[var lasttitem =  (obj.page * obj.items_per_page);]]
+			{{firstitem}}-{{lasttitem}}
+		</span>
+	</div>
+</div>
+</script>
+
+
+<script type="text/template" id="item-template">
+<td>
+<span class="item-selector">&#10004;</span>
+
+</td><td class="detail">
+{{obj.subject}}
+</td><td>
+{{obj.date_posted}}
+</td><td>
+{{obj.closing_date}}
+</td><td class="detail">
+{{obj.number_applicants}}
+</td><td>
+{{obj.job_status}}
+</td><td>
+{{obj.number_applications}}
+</td>
+</script>
+
+
+<script type="text/template" id="detail-template">
+	<div class="main">
+		<header class="mainheader">
+			<h1><span class="icon-badge"></span>{{obj.subject}} <span class="">&#9733;</span><div class="fr"><span class="config"></span><span class="edit-record">edit record</span></div></h1>
+			<nav>
+				<a href="" class="on">overview</a>
+				<a href="">full record</a>
+			</nav>
+		</header>
+		<div class="details-container">
+			<div class="details-applications">
+				<h2><span class="icon-applications"></span>Applications</h2>
+				<div class="appications-resume">
+					<dl>
+					<dt>total</dt>
+					<dd>{{obj.applications.total}}</dd>
+					</dl>
+					<dl>
+					<dt>new</dt>
+					<dd>{{obj.applications.new}}</dd>
+					</dl>
+					<dl>
+					<dt><span class="icon-hot"></span>hot</dt>
+					<dd>{{obj.applications.hot}}</dd>
+					</dl>
+					<dl>
+					<dt><span class="icon-interesting"></span>interesting</dt>
+					<dd>{{obj.applications.interesting}}</dd>
+					</dl>
+					<dl>
+					<dt><span class="icon-disqualified"></span>disqualified</dt>
+					<dd>{{obj.applications.disqualified}}</dd>
+					</dl>
+				</div>
+			</div>
+			<div class="applications-container"></div>
+			<div class="applications-footer">
+This is a note. Use notes to enter updates about a call, a meeting, or a conversation
+you had with a contact. Notes are helpful by keeping a history of your communications
+with a contact or deal.
+			</div>
+			<span class="view_all">View All</span>
+		</div>
+		<aside>
+			<div class="workbox">
+				<div class="notes br">
+					<a href="" class="icon-tasks"></a>
+					<span>Tasks (10)</span>
+				</div>
+				<div class="notes">
+					<a href="" class="icon-events"></a>
+					<span>Events (2)</span>
+				</div>
+				<div class="notes br bt">
+					<a href="" class="icon-notes"></a>
+					<span>Notes (2)</span>
+				</div>
+				<div class="notes bt">
+					<a href="" class="icon-docs"></a>
+					<span>Docs (4)</span>
+				</div>
+			</div>
+			<ul>
+				<li><span class="icon-view"></span>View Live Post</li>
+				<li><span class="icon-tweet"></span>Tweet this job</li>
+				<li><span class="icon-linkedin"></span>Recommend this job</li>
+				<li><span class="icon-facebook"></span>Share this job</li>
+			</ul>
+		</aside>
+	</div>
+
+</script>
+<script type="text/template" id="activity-collection-template">
+<h2><span class="icon-activity"></span>Activity</h2>
+<div class="activity-collection-header">Displaying all activity by everyone</div>
+</script>
+
+<script type="text/template" id="activity-item-template">
+[[if (obj.task){]]
+	<span class="person_name" data-view_id="{{obj.person_id}}" data-view_type="persons">{{obj.person_name}}</span> 
+	{{obj.task.task_status}} 
+	[[if (obj.task.task_set === "task"){]]
+		his <span class="task_name" data-view_id="{{obj.task.task_id}}" data-view_type="tasks">{{obj.task.task_name}}</span>
+	[[} else if (obj.task.task_set === "person"){]]
+		<span class="person_name" data-view_id="{{obj.task.person_id}}" data-view_type="persons">{{obj.task.person_name}}</span>
+	[[}]]
+	[[if (obj.task.task_result){]]
+		with a {{obj.task.task_result}}
+	[[}]]
+	<span class="task_date">
+	    {{obj.task.task_date}}
+	</span>
+[[}]]
+</script>
+
+
+<script type="text/template" id="smallview-template">
+	<div class="main">
+		<header class="mainheader">
+			<h1><span class="icon-badge"></span>{{obj.name}} <span class="">&#9733;</span><div class="fr"><span class="config"></span><span class="edit-record">edit record</span></div></h1>
+			<nav>
+				<a href="" class="on">overview</a>
+				<a href="">full record</a>
+			</nav>
+		</header>
+		<aside>
+			<div class="workbox">
+				<div class="notes br">
+					<a href="" class="icon-tasks"></a>
+					<span>Tasks (10)</span>
+				</div>
+				<div class="notes">
+					<a href="" class="icon-events"></a>
+					<span>Events (2)</span>
+				</div>
+				<div class="notes br bt">
+					<a href="" class="icon-notes"></a>
+					<span>Notes (2)</span>
+				</div>
+				<div class="notes bt">
+					<a href="" class="icon-docs"></a>
+					<span>Docs (4)</span>
+				</div>
+			</div>
+			<ul>
+				<li><span class="icon-view"></span>View Live Post</li>
+				<li><span class="icon-tweet"></span>Tweet this job</li>
+				<li><span class="icon-linkedin"></span>Recommend this job</li>
+				<li><span class="icon-facebook"></span>Share this job</li>
+			</ul>
+		</aside>
+	</div>
+
+</script>
